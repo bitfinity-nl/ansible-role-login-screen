@@ -1,0 +1,30 @@
+---
+  # Tasks: ansible-role-login-screen
+  #
+  # Author: Luc Rutten
+  # Version: 1.0
+  #
+
+  - name: "Create directory when not exist"
+    file:
+      path: /opt/scripts
+      state: directory
+      owner: root
+      group: root
+      mode: 0754
+
+  - name: "Copy template banner.sh.j2"
+    template:
+      src: banner.sh.j2
+      dest: /opt/scripts/banner.sh
+      owner: root
+      group: root
+      mode: 0754
+
+  - name: rc.local
+    blockinfile:
+      path: /opt/scripts/banner.sh
+      insertbefore: "exit 0"
+      block: |
+        # Update Banner
+        /opt/scripts/banner.sh

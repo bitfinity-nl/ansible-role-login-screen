@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Role: ansible-role-login-screen
+#
+# Author: Luc Rutten
+# Version: 1.0
+#
+
+BAN_HOSTNAME=$(lsb_release -a | grep Description | cut -f2)
+BAN_IPADDRESS=$(/sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')
+BAN_DESCRIPTION="Default Ubuntu server"
+
+BAN_COMPANY="{{ ubt_company_name }}"
+BAN_PHONE="{{ ubt_company_phone }}"
+BAN_MAIL="{{ ubt_company_mail }}"
+
+echo "
+ Hostname ..........: $(hostname)
+ -------------------
+ IP address ........: $BAN_IPADDRESS
+ Operating System ..: $BAN_HOSTNAME
+ Description .......: $BAN_DESCRIPTION
+
+ Company ...........: $BAN_COMPANY
+ Phone .............: $BAN_PHONE
+ Mail ..............: $BAN_MAIL
+" > /etc/issue
