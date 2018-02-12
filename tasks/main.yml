@@ -24,7 +24,7 @@
   - name: rc.local
     blockinfile:
       path: /opt/scripts/banner.sh
-      insertbefore: "exit 0"
+      insertafter: "# By default this script does nothing."
       block: |
         # Update Banner
         /opt/scripts/banner.sh
