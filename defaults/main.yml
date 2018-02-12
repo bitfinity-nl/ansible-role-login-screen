@@ -6,6 +6,6 @@
   #
 
   # Banner Branding settings
-  ubt_company: bitfinity
-  ubt_phone: +31(0)123456789
-  ubt_mail: support@bitfinity.nl
+  ubt_company_name: bitfinity
+  ubt_company_phone: +31(0)123456789
+  ubt_company_mail: support@bitfinity.nl
