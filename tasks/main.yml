@@ -21,10 +21,22 @@
       group: root
       mode: 0754
 
-  - name: rc.local
+  - name: "Add /opt/scripts/banner.sh to /etc/rc.local for automatic update banner on startup"
     blockinfile:
-      path: /opt/scripts/banner.sh
-      insertafter: "# By default this script does nothing."
+      path: /etc/rc.local
+      backup: yes
+      marker: "# {mark} MANAGED BY ANSIBLE - Banner update on startup"
+      insertbefore: "exit 0"
       block: |
-        # Update Banner
         /opt/scripts/banner.sh
+      state: present
+
+  - name: "Add chvt 1 to /etc/rc.local for fix for showing login screen"
+    blockinfile:
+      path: /etc/rc.local
+      marker: "# {mark} MANAGED BY ANSIBLE - Fix for showing login screen"
+      backup: yes
+      insertbefore: "exit 0"
+      block: |
+        chvt 1
+      state: present
